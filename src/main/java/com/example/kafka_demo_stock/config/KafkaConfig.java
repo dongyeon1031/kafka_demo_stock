@@ -1,6 +1,6 @@
-package com.example.kafka_demo_consumer2.config;
+package com.example.kafka_demo_stock.config;
 
-import com.example.kafka_demo_consumer2.model.OrderEvent;
+import com.example.kafka_demo_stock.model.OrderEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;

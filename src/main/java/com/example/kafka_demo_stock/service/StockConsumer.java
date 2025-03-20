@@ -1,6 +1,6 @@
-package com.example.kafka_demo_consumer2.service;
+package com.example.kafka_demo_stock.service;
 
-import com.example.kafka_demo_consumer2.model.OrderEvent;
+import com.example.kafka_demo_stock.model.OrderEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

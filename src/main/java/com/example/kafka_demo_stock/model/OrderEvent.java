@@ -1,4 +1,4 @@
-package com.example.kafka_demo_consumer2.model;
+package com.example.kafka_demo_stock.model;
 
 import lombok.Data;
 
