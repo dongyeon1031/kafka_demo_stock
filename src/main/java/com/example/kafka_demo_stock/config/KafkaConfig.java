@@ -1,6 +1,7 @@
 package com.example.kafka_demo_stock.config;
 
 import com.example.kafka_demo_stock.model.OrderEvent;
+import com.example.kafka_demo_stock.model.LoadTestEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +39,29 @@ public class KafkaConfig {
     public ConcurrentKafkaListenerContainerFactory<String, OrderEvent> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, OrderEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, LoadTestEvent> loadTestConsumerFactory() {
+        JsonDeserializer<LoadTestEvent> deserializer = new JsonDeserializer<>(LoadTestEvent.class);
+        deserializer.setRemoveTypeHeaders(false);
+        deserializer.addTrustedPackages("*");
+        deserializer.setUseTypeMapperForKey(true);
+
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "stock-service");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
+
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, LoadTestEvent> loadTestKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, LoadTestEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(loadTestConsumerFactory());
         return factory;
     }
 }
