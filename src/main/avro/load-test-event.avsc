@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "LoadTestEvent",
+  "namespace": "com.example.kafka_demo_order",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "content", "type": "int" }
+  ]
+}

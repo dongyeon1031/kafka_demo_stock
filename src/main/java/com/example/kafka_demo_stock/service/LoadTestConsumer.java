@@ -1,6 +1,6 @@
 package com.example.kafka_demo_stock.service;
 
-import com.example.kafka_demo_stock.model.LoadTestEvent;
+import com.example.kafka_demo_order.LoadTestEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

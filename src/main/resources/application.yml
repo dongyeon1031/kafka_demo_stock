@@ -6,8 +6,10 @@ spring:
     bootstrap-servers: localhost:9092
 #    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9092} # docker compose 실행용
     consumer:
+      auto-offset-reset: latest
       group-id: stock-service
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
-        spring.json.trusted.packages: "*"
+        schema.registry.url: http://localhost:8081
+        specific.avro.reader: true # avro 메시지를 generic 레코드가 아니라 사용자 정의 클래스로 직접 변환
